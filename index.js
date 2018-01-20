@@ -3,10 +3,6 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-app.get('/', function(request, response) {
-	response.send('Hello World')
-});
+app.get('/', (request, response) => response.send('Hello World'));
 
-app.listen(port, function() {
-	console.log('Listening on port 3000')
-});
+app.listen(port, () => console.log('Listening on port 3000'));
