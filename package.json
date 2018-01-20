@@ -4,15 +4,20 @@
   "description": "A spren with no body or mind.",
   "main": "index.js",
   "dependencies": {
+    "applicationinsights": "^1.0.1",
     "express": "^4.16.2"
   },
   "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
     "nodemon": "^1.14.11"
   },
   "scripts": {
     "start": "node index.js",
-    "nodemon": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon index.js --exec 'npm run lint && node'",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint app index.js"
   },
   "repository": {
     "type": "git",
@@ -27,8 +32,7 @@
     "url": "https://github.com/harry671003/syl/issues"
   },
   "homepage": "https://github.com/harry671003/syl#readme",
-  "engines":
-    {
-      "node": ">=8.9.3 <10.0.0"
-    }
+  "engines": {
+    "node": ">=8.9.3 <10.0.0"
+  }
 }

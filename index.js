@@ -1,9 +1,11 @@
 const express = require('express');
+
+const config = require('./config');
+const logging = require('./app/infrastructure/logging');
+
+const initializeRoutes = require('./app/routes');
+
 const app = express();
+initializeRoutes(app, config, logging.createLogger(config));
 
-const port = process.env.PORT || 3000;
-
-app.get('/ping', (request, response) => response.send('pong'));
-app.get('/', (request, response) => response.send('Hey, Syl here!'));
-
-app.listen(port, () => console.log('Listening on port 3000'));
+app.listen(config.environment.port);
