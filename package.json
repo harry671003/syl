@@ -1,0 +1,29 @@
+{
+  "name": "syl",
+  "version": "0.0.1",
+  "description": "A spren with no body or mind.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  },
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry671003/syl.git"
+  },
+  "keywords": [
+    "syl"
+  ],
+  "author": "harry671003@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harry671003/syl/issues"
+  },
+  "homepage": "https://github.com/harry671003/syl#readme"
+}
