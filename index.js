@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const appRootPath = require('app-root-path');
 
-const config = require('./config');
-const logging = require('./app/infrastructure/logging');
+global.baseRequire = appRootPath.require;
 
-const initializeRoutes = require('./app/routes');
+const config = baseRequire('/config');
+const logging = baseRequire('/app/infrastructure/logging');
+const initializeRoutes = baseRequire('/app/routes');
 
 const app = express();
 

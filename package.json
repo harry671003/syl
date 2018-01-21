@@ -4,7 +4,9 @@
   "description": "A spren with no body or mind.",
   "main": "index.js",
   "dependencies": {
+    "app-root-path": "^2.0.1",
     "applicationinsights": "^1.0.1",
+    "azure-storage": "^2.7.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2"
   },

@@ -1,5 +1,7 @@
 const express = require('express');
 
+const TelegramConnector = baseRequire('/app/connectors/telegram');
+
 module.exports = function configureReceiveRoutes(config, logger) {
   const router = express.Router();
 
@@ -9,6 +11,9 @@ module.exports = function configureReceiveRoutes(config, logger) {
     });
 
     if (request.query.token === config.secrets.telegram.token) {
+      const connector = new TelegramConnector(config);
+
+      connector.processUpdate(request.body);
       response.json({
         message: 'Hello, welcome to my server',
       });

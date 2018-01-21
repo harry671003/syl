@@ -1,13 +1,19 @@
 module.exports = {
-  "environment": {
-    "port": process.env.PORT || 3000
+  'environment': {
+    'port': process.env.SYL_PORT || process.env.PORT || 3000
   },
-  "secrets": {
-    "telegram": {
-      "token": process.env.TELEGRAM_TOKEN
+  'secrets': {
+    'telegram': {
+      'token': process.env.SYL_TELEGRAM_TOKEN
     }
   },
-  "appInsights": {
-    "key": process.env.APPINSIGHTS_KEY || "f43bc807-e98e-4bde-a0de-5501297e9a66"
+  'appInsights': {
+    'key': process.env.SYL_APPINSIGHTS_KEY
+  },
+  'brain': { // azure storage account
+    'accountName': process.env.SYL_BRAIN_CONN,
+    'sensoryInputQueue': {
+      'name': 'sensory-inputs'
+    }
   }
 }
