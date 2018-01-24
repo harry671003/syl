@@ -14,5 +14,5 @@
   - A webjob that processes the sensory input and acts on it.
   - Calls wit.ai and identifies context and indents from the message.
   
- # Architecture Diagram
+ ## Architecture Diagram
   ![Syl - Architecture diagram](images/architecture.png "Syl Architecture")
