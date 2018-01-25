@@ -1,14 +1,30 @@
-const Queue = baseRequire('/app/infrastructure/storage/queue');
 const mapper = require('./mapper');
 
-function TelegramConnector(config) {
-  this.queueConn = new Queue(config.brain.accountName);
-  this.queueName = config.brain.sensoryInputQueue;
+const MessagePerceptor = baseRequire('/app/perceptors/message-perceptor');
+
+function TelegramConnector(perceptor) {
+  this.perceptor = perceptor;
 }
 
-TelegramConnector.prototype.processUpdate = function processUpdate(update) {
+TelegramConnector.prototype.processUpdate = function processUpdate(update, cb) {
   const sensoryInput = mapper.mapFromTelegramInputToSensoryInput(update);
-  console.log(sensoryInput);
+
+  this.perceptor.sense(sensoryInput, cb);
 };
 
-module.exports = TelegramConnector;
+const singleton = {
+  initialize: function initialize(config, cb) {
+    const perceptor = new MessagePerceptor(config);
+
+    perceptor.initialize((error) => {
+      if (!error) {
+        singleton.instance = new TelegramConnector(perceptor);
+      }
+
+      cb(error);
+    });
+  },
+  instance: null,
+};
+
+module.exports = singleton;

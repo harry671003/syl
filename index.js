@@ -4,15 +4,18 @@ const appRootPath = require('app-root-path');
 
 global.baseRequire = appRootPath.require;
 
-const config = baseRequire('/config');
-const logging = baseRequire('/app/infrastructure/logging');
-const initializeRoutes = baseRequire('/app/routes');
+const config = require('./config');
+const syl = require('./app');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-initializeRoutes(app, config, logging.createLogger(config));
+syl.initialize(app, config, (error) => {
+  if (error) {
+    throw error;
+  }
 
-app.listen(config.environment.port);
+  app.listen(config.environment.port);
+});

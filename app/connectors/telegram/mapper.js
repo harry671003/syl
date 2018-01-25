@@ -1,9 +1,10 @@
 const SensoryInput = baseRequire('/app/models/sensory-input');
 
-function mapFromTelegramInputToSensoryInput() {
+function mapFromTelegramInputToSensoryInput(update) {
   return new SensoryInput({
     type: 'chat',
     source: 'telegram',
+    body: update,
   });
 }
 

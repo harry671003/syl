@@ -1,6 +1,6 @@
 const express = require('express');
 
-const TelegramConnector = baseRequire('/app/connectors/telegram');
+const telegramConnector = baseRequire('/app/connectors/telegram');
 
 module.exports = function configureReceiveRoutes(config, logger) {
   const router = express.Router();
@@ -11,11 +11,16 @@ module.exports = function configureReceiveRoutes(config, logger) {
     });
 
     if (request.query.token === config.secrets.telegram.token) {
-      const connector = new TelegramConnector(config);
+      const connector = telegramConnector.instance;
 
-      connector.processUpdate(request.body);
-      response.json({
-        message: 'Hello, welcome to my server',
+      connector.processUpdate(request.body, (error) => {
+        if (!error) {
+          response.json({
+            message: 'Successfully registered input.',
+          });
+        } else {
+          throw new Error('Unable to process');
+        }
       });
     } else {
       response.status(401).json({

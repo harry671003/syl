@@ -11,7 +11,7 @@ module.exports = {
     'key': process.env.SYL_APPINSIGHTS_KEY
   },
   'brain': { // azure storage account
-    'accountName': process.env.SYL_BRAIN_CONN,
+    'connStr': process.env.SYL_BRAIN_CONN,
     'sensoryInputQueue': {
       'name': 'sensory-inputs'
     }

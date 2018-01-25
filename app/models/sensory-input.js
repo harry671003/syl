@@ -15,8 +15,8 @@ SensoryInput.prototype.schema = {
   source: {
     required: true,
   },
-  blah: {
-    required: false,
+  body: {
+    required: true,
   },
 };
 
