@@ -1,7 +1,8 @@
-const telegramConnector = require('./telegram');
+const telegram = require('./telegram');
 
 module.exports = {
   initializers: [
-    telegramConnector.initialize,
+    telegram.initialize,
   ],
+  telegram: telegram.getInstance,
 };
