@@ -1,9 +1,21 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const appRootPath = require('app-root-path');
+
+global.baseRequire = appRootPath.require;
+
+const config = require('./config');
+const syl = require('./app');
+
 const app = express();
 
-const port = process.env.PORT || 3000;
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-app.get('/ping', (request, response) => response.send('pong'));
-app.get('/', (request, response) => response.send('Hey, Syl here!'));
+syl.initialize(app, config, (error) => {
+  if (error) {
+    throw error;
+  }
 
-app.listen(port, () => console.log('Listening on port 3000'));
+  app.listen(config.environment.port);
+});
