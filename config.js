@@ -28,9 +28,4 @@ module.exports = {
       name: 'sensory-inputs',
     },
   },
-  jobs: {
-    sensoryInputProcessor: {
-      pollingInterval: 5000,
-    },
-  },
 };
