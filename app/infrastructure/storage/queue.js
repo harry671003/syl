@@ -13,7 +13,6 @@ Queue.prototype.initialize = function init(cb) {
   );
 };
 
-
 Queue.prototype.sendMessage = function send(message, cb) {
   this.queueSvc.createMessage(
     this.queueName,
