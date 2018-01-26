@@ -9,7 +9,8 @@
     "async": "^2.6.0",
     "azure-storage": "^2.7.0",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "fs-extra": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^4.16.0",
@@ -21,7 +22,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js --exec 'npm run lint && node'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint app index.js"
+    "lint": "eslint app jobs index.js config.js",
+    "postinstall": "node ./scripts/install-jobs.js"
   },
   "repository": {
     "type": "git",
