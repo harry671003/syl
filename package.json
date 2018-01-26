@@ -22,7 +22,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js --exec 'npm run lint && node'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint app jobs index.js config.js",
+    "lint": "eslint app jobs index.js config.js scripts",
     "postinstall": "node ./scripts/install-jobs.js"
   },
   "repository": {
