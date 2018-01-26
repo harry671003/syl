@@ -2,9 +2,14 @@ const path = require('path');
 const appRootPath = require('app-root-path');
 const fse = require('fs-extra');
 
+const jobTypes = {
+  CONTINUOUS: 'continuous',
+  TRIGGERED: 'triggered',
+};
+
 const jobDefinitions = [
   {
-    type: 'continous',
+    type: jobTypes.CONTINUOUS,
     path: path.join(appRootPath.toString(), 'jobs', 'sensory-input-processor'),
     name: 'sensory-input-processor',
   },
