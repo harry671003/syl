@@ -7,12 +7,12 @@ function MessagePerceptor(config) {
   );
 }
 
-MessagePerceptor.prototype.initialize = function init(cb) {
-  this.sensoryInputQ.initialize(cb);
+MessagePerceptor.prototype.initialize = async function init() {
+  await this.sensoryInputQ.initialize();
 };
 
-MessagePerceptor.prototype.sense = function Register(perception, cb) {
-  this.sensoryInputQ.sendMessage(perception, cb);
+MessagePerceptor.prototype.sense = async function sense(perception) {
+  await this.sensoryInputQ.sendMessage(perception);
 };
 
 module.exports = MessagePerceptor;

@@ -8,7 +8,7 @@ const configure = (config, logger) => {
 
   router.use(tokenAuth(config.secrets.sendWebhook.token));
 
-  router.post('/', (request, response) => {
+  router.post('/', async (request, response) => {
     logger.trackEvent('telegram_request', {
       'request-body': JSON.stringify(request.body, 2),
     });
@@ -25,9 +25,8 @@ const configure = (config, logger) => {
       return;
     }
 
-    connector().send(request.body, () => {
-      response.json({ message: 'sending' });
-    });
+    await connector().send(request.body);
+    response.json({ message: 'success' });
   });
 
   return router;
