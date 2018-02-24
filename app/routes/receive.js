@@ -40,10 +40,18 @@ const configure = (config, logger) => {
       'request-body': JSON.stringify(request.body, 2),
     });
 
-    await connector().receive(request.body);
-    response.json({
-      message: 'Successfully registered input.',
-    });
+    try {
+      await connector().receive(request.body);
+      response.json({
+        message: 'Successfully registered input.',
+      });
+    } catch (error) {
+      response.status(500)
+        .json({
+          error,
+          message: 'failed',
+        });
+    }
   });
 
   return router;

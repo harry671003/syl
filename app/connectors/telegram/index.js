@@ -11,14 +11,13 @@ function TelegramConnector(config, perceptor) {
 
 TelegramConnector.prototype.receive = async function receive(update) {
   const sensoryInput = mapper.mapFromTelegramInputToSensoryInput(update);
-
   await this.perceptor.sense(sensoryInput);
 };
 
 TelegramConnector.prototype.send = async function send(message) {
   await axios.post(`${this.telegramApiUrl}/sendMessage`, {
-    chat_id: message.body.chat_id,
-    text: message.body.text,
+    chat_id: message.sourceInput.message.chat.id,
+    text: message.content.value,
   });
 };
 
