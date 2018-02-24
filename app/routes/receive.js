@@ -13,7 +13,7 @@ const configure = (config, logger) => {
 
   const router = express.Router();
 
-  router.post('/:serviceName', (request, response) => {
+  router.post('/:serviceName', async (request, response) => {
     // Auth.
     const { serviceName } = request.params;
     const service = services[serviceName];
@@ -40,15 +40,18 @@ const configure = (config, logger) => {
       'request-body': JSON.stringify(request.body, 2),
     });
 
-    connector().receive(request.body, (error) => {
-      if (!error) {
-        response.json({
-          message: 'Successfully registered input.',
+    try {
+      await connector().receive(request.body);
+      response.json({
+        message: 'Successfully registered input.',
+      });
+    } catch (error) {
+      response.status(500)
+        .json({
+          error,
+          message: 'failed',
         });
-      } else {
-        throw new Error('Unable to process');
-      }
-    });
+    }
   });
 
   return router;

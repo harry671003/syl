@@ -1,8 +1,10 @@
+const deepmerge = require('deepmerge');
+
 const settingsUndefined = () => {
   throw new Error('All required secrets are not defined');
 };
 
-module.exports = {
+const baseConfig = {
   environment: {
     port: process.env.SYL_PORT || process.env.PORT || 3000,
   },
@@ -28,9 +30,23 @@ module.exports = {
       name: 'sensory-inputs',
     },
   },
-  jobs: {
-    sensoryInputProcessor: {
-      pollingInterval: 5000,
-    },
-  },
 };
+
+const configExtensions = {
+  DEV: {},
+  PROD: {},
+};
+
+const buildConfig = () => {
+  const environment = process.env.SYL_ENV || 'DEV';
+
+  const configExt = configExtensions[environment];
+
+  if (!configExt) {
+    throw new Error('Invalid environemnt');
+  }
+
+  return deepmerge(baseConfig, configExt);
+};
+
+module.exports = buildConfig();

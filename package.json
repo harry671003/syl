@@ -6,12 +6,14 @@
   "dependencies": {
     "app-root-path": "^2.0.1",
     "applicationinsights": "^1.0.1",
-    "async": "^2.6.0",
     "axios": "^0.17.1",
     "azure-storage": "^2.7.0",
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "deepmerge": "^2.0.1",
     "express": "^4.16.2",
-    "fs-extra": "^5.0.0"
+    "fs-extra": "^5.0.0",
+    "joi": "^13.1.2"
   },
   "devDependencies": {
     "eslint": "^4.16.0",
@@ -23,8 +25,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js --exec 'npm run lint && node'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint app jobs index.js config.js scripts",
-    "postinstall": "node ./scripts/install-jobs.js"
+    "lint": "eslint app index.js config.js"
   },
   "repository": {
     "type": "git",

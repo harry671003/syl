@@ -9,33 +9,24 @@ function TelegramConnector(config, perceptor) {
   this.telegramApiUrl = config.connectors.telegram.apiUrl;
 }
 
-TelegramConnector.prototype.receive = function receive(update, cb) {
+TelegramConnector.prototype.receive = async function receive(update) {
   const sensoryInput = mapper.mapFromTelegramInputToSensoryInput(update);
-
-  this.perceptor.sense(sensoryInput, cb);
+  await this.perceptor.sense(sensoryInput);
 };
 
-TelegramConnector.prototype.send = function send(message, cb) {
-  axios.post(`${this.telegramApiUrl}/sendMessage`, {
-    chat_id: message.body.chat_id,
-    text: message.body.text,
-  }).then((response) => {
-    console.log(response.data);
-    cb();
-  }).catch(cb);
+TelegramConnector.prototype.send = async function send(message) {
+  await axios.post(`${this.telegramApiUrl}/sendMessage`, {
+    chat_id: message.sourceInput.message.chat.id,
+    text: message.content.value,
+  });
 };
 
 const connector = {
-  initialize: (config, cb) => {
+  initialize: async (config) => {
     const perceptor = new MessagePerceptor(config);
+    await perceptor.initialize();
 
-    perceptor.initialize((error) => {
-      if (!error) {
-        this.instance = new TelegramConnector(config, perceptor);
-      }
-
-      cb(error);
-    });
+    this.instance = new TelegramConnector(config, perceptor);
   },
   getInstance: () => this.instance,
 };

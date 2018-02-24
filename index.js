@@ -12,10 +12,9 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-syl.initialize(app, config, (error) => {
-  if (error) {
-    throw error;
-  }
-
+const startServer = async () => {
+  await syl.initialize(app, config);
   app.listen(config.environment.port);
-});
+};
+
+startServer();
